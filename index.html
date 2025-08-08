@@ -4,7 +4,996 @@
 <html>
 <head><title>Roblox Game Dev Academy</title></head>
 <body>
-<h1>Roblox Game Dev Academy</h1>
-<!-- Full content would go here -->
+
+<title>Roblox Game Dev Academy 🚀</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+
+        .header {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 10px rgba(255,255,255,0.3); }
+            to { text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.6); }
+        }
+
+        .subtitle {
+            color: #f0f8ff;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .progress-container {
+            background: rgba(255,255,255,0.2);
+            border-radius: 25px;
+            padding: 5px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+            height: 20px;
+            border-radius: 20px;
+            width: 0%;
+            transition: width 0.5s ease;
+            position: relative;
+        }
+
+        .progress-text {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .curriculum-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .module {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .module:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .module-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .module-icon {
+            font-size: 2.5rem;
+            margin-right: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .module h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .difficulty {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .beginner { background: #4CAF50; color: white; }
+        .intermediate { background: #FF9800; color: white; }
+        .advanced { background: #F44336; color: white; }
+
+        .module p {
+            color: #f0f8ff;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .topics {
+            list-style: none;
+        }
+
+        .topics li {
+            color: #e0e8ff;
+            padding: 0.25rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .topics li::before {
+            content: '🚀';
+            position: absolute;
+            left: 0;
+        }
+
+        .module.completed {
+            background: rgba(76, 175, 80, 0.2);
+            border-color: #4CAF50;
+        }
+
+        .module.completed::after {
+            content: '✅';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .floating-code {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.1);
+            font-family: 'Courier New', monospace;
+            animation: float 6s ease-in-out infinite;
+            font-size: 0.8rem;
+        }
+
+        .rocket {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            font-size: 3rem;
+            animation: float 4s ease-in-out infinite;
+            z-index: 100;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .rocket:hover {
+            transform: scale(1.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 25px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid rgba(100, 255, 218, 0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, rgba(100, 255, 218, 0.2), rgba(255, 107, 107, 0.2));
+            padding: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+
+        .modal-body {
+            padding: 2rem;
+            max-height: calc(90vh - 120px);
+            overflow-y: auto;
+            color: white;
+        }
+
+        .close {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+            background: rgba(255,255,255,0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .close:hover {
+            color: #ff6b6b;
+            transform: rotate(90deg) scale(1.1);
+            background: rgba(255, 107, 107, 0.2);
+        }
+
+        .lesson-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section-header {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0 1rem 0;
+            border-left: 4px solid #4ecdc4;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-header h4 {
+            color: #4ecdc4;
+            font-size: 1.4rem;
+            margin: 0;
+        }
+
+        .lesson-content p {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            border: 1px solid rgba(255,255,255,0.1);
+            line-height: 1.6;
+        }
+
+        .code-container {
+            background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(30,30,60,0.4));
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            position: relative;
+        }
+
+        .code-block {
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #e8f5e8;
+            overflow-x: auto;
+        }
+
+        .code-line {
+            display: block;
+            padding: 0.2rem 0;
+            border-radius: 4px;
+            transition: background 0.2s ease;
+        }
+
+        .code-line:hover {
+            background: rgba(78, 205, 196, 0.1);
+        }
+
+        .code-comment {
+            color: #7dd3fc;
+            font-style: italic;
+        }
+
+        .code-keyword {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        .code-string {
+            color: #4ade80;
+        }
+
+        .step-container {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .complete-button {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .complete-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .curriculum-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="floating-elements">
+        <div class="floating-code" style="top: 10%; left: 10%;">print("Hello World!")</div>
+        <div class="floating-code" style="top: 20%; right: 15%;">game.Players</div>
+        <div class="floating-code" style="top: 60%; left: 5%;">script.Parent</div>
+        <div class="floating-code" style="top: 80%; right: 20%;">workspace</div>
+    </div>
+
+    <div class="header">
+        <h1>🚀 Roblox Game Dev Academy</h1>
+        <p class="subtitle">Master the art of creating amazing Roblox games!</p>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-text" id="progressText">0% Complete</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="curriculum-grid" id="curriculum">
+        </div>
+    </div>
+
+    <div class="rocket" onclick="scrollToTop()">🚀</div>
+
+    <div id="lessonModal" class="modal">
+        <div class="modal-content">
+            <div id="lessonContent">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let modules = [
+            {
+                id: 1,
+                title: "Lua Basics & Roblox Studio",
+                icon: "🎯",
+                difficulty: "beginner",
+                description: "Start your journey with Lua programming fundamentals and Roblox Studio interface.",
+                topics: [
+                    "Variables, data types, and operators",
+                    "Control structures (if/else, loops)",
+                    "Functions and scope",
+                    "Roblox Studio interface tour",
+                    "Creating your first script"
+                ],
+                completed: false
+            },
+            {
+                id: 2,
+                title: "Working with Parts & Objects",
+                icon: "🧱",
+                difficulty: "beginner",
+                description: "Learn to manipulate game objects, parts, and their properties.",
+                topics: [
+                    "Part properties (Size, Position, Color)",
+                    "Creating and destroying objects",
+                    "Parent-child relationships",
+                    "Anchoring and physics",
+                    "Basic part scripting exercises"
+                ],
+                completed: false
+            },
+            {
+                id: 3,
+                title: "Player & Character Systems",
+                icon: "👤",
+                difficulty: "intermediate",
+                description: "Master player management, character manipulation, and user interactions.",
+                topics: [
+                    "Players service and events",
+                    "Character spawning and respawning",
+                    "Humanoid properties and methods",
+                    "Player data and leaderstats",
+                    "Chat commands and user input"
+                ],
+                completed: false
+            },
+            {
+                id: 4,
+                title: "GUI Creation & Design",
+                icon: "🎨",
+                difficulty: "intermediate",
+                description: "Create stunning user interfaces and interactive menus for your games.",
+                topics: [
+                    "ScreenGui and Frame basics",
+                    "TextLabel, TextButton, ImageLabel",
+                    "Layout and positioning",
+                    "Tweening GUI elements",
+                    "Mobile-responsive design"
+                ],
+                completed: false
+            },
+            {
+                id: 5,
+                title: "Events & Communication",
+                icon: "📡",
+                difficulty: "intermediate",
+                description: "Handle events, remote communication, and real-time interactions.",
+                topics: [
+                    "RBXScriptSignal and connections",
+                    "RemoteEvents and RemoteFunctions",
+                    "Client-server communication",
+                    "Security best practices",
+                    "Event-driven programming patterns"
+                ],
+                completed: false
+            },
+            {
+                id: 6,
+                title: "Data Storage & Persistence",
+                icon: "💾",
+                difficulty: "advanced",
+                description: "Implement data saving systems to persist player progress and game state.",
+                topics: [
+                    "DataStore service basics",
+                    "Saving and loading player data",
+                    "Error handling and retry logic",
+                    "Data structure design",
+                    "Leaderboards and statistics"
+                ],
+                completed: false
+            },
+            {
+                id: 7,
+                title: "Game Mechanics & Logic",
+                icon: "⚙️",
+                difficulty: "advanced",
+                description: "Build core game systems like inventory, combat, and progression.",
+                topics: [
+                    "Inventory and item systems",
+                    "Combat and health mechanics",
+                    "Economy and currency",
+                    "Quest and achievement systems",
+                    "Game state management"
+                ],
+                completed: false
+            },
+            {
+                id: 8,
+                title: "Advanced Scripting & Optimization",
+                icon: "🚀",
+                difficulty: "advanced",
+                description: "Master advanced techniques for creating professional-quality games.",
+                topics: [
+                    "ModuleScript organization",
+                    "Object-oriented programming in Lua",
+                    "Performance optimization",
+                    "Memory management",
+                    "Advanced debugging techniques"
+                ],
+                completed: false
+            }
+        ];
+
+        // Lesson content
+        const lessonContent = {
+            1: {
+                title: "Lua Basics & Roblox Studio",
+                content: `
+                    <div class="section-header">
+                        <h4>🎯 Welcome to Lua Programming!</h4>
+                    </div>
+                    <p>Lua is the scripting language that powers Roblox games. It's lightweight, fast, and perfect for game development.</p>
+                    
+                    <div class="section-header">
+                        <h4>📊 Variables and Data Types</h4>
+                    </div>
+                    <div class="code-container">
+                        <div class="code-block">
+<span class="code-line"><span class="code-comment">-- Variables in Lua</span></span>
+<span class="code-line"><span class="code-keyword">local</span> playerName = <span class="code-string">"RobloxDev"</span>  <span class="code-comment">-- string</span></span>
+<span class="code-line"><span class="code-keyword">local</span> playerLevel = <span class="code-string">10</span>          <span class="code-comment">-- number</span></span>
+<span class="code-line"><span class="code-keyword">local</span> isOnline = <span class="code-string">true</span>           <span class="code-comment">-- boolean</span></span>
+<span class="code-line"><span class="code-keyword">local</span> inventory = {}            <span class="code-comment">-- table</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="section-header">
+                        <h4>🔀 Control Structures</h4>
+                    </div>
+                    <div class="code-container">
+                        <div class="code-block">
+<span class="code-line"><span class="code-comment">-- If statements</span></span>
+<span class="code-line"><span class="code-keyword">if</span> playerLevel >= <span class="code-string">10</span> <span class="code-keyword">then</span></span>
+<span class="code-line">    <span class="code-keyword">print</span>(<span class="code-string">"You're experienced!"</span>)</span>
+<span class="code-line"><span class="code-keyword">elseif</span> playerLevel >= <span class="code-string">5</span> <span class="code-keyword">then</span></span>
+<span class="code-line">    <span class="code-keyword">print</span>(<span class="code-string">"You're getting there!"</span>)</span>
+<span class="code-line"><span class="code-keyword">else</span></span>
+<span class="code-line">    <span class="code-keyword">print</span>(<span class="code-string">"Keep practicing!"</span>)</span>
+<span class="code-line"><span class="code-keyword">end</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="section-header">
+                        <h4>🚀 Your First Roblox Script</h4>
+                    </div>
+                    <div class="step-container">
+                        <span class="step-number">1</span>Open Roblox Studio
+                    </div>
+                    <div class="step-container">
+                        <span class="step-number">2</span>Insert a Part into the Workspace
+                    </div>
+                    <div class="step-container">
+                        <span class="step-number">3</span>Add a Script to the Part
+                    </div>
+                    <div class="step-container">
+                        <span class="step-number">4</span>Try this code:
+                    </div>
+                    <div class="code-container">
+                        <div class="code-block">
+<span class="code-line"><span class="code-comment">-- Make the part change colors</span></span>
+<span class="code-line"><span class="code-keyword">local</span> part = <span class="code-string">script.Parent</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-keyword">while</span> <span class="code-string">true</span> <span class="code-keyword">do</span></span>
+<span class="code-line">    part.BrickColor = BrickColor.Random()</span>
+<span class="code-line">    <span class="code-keyword">wait</span>(<span class="code-string">1</span>)</span>
+<span class="code-line"><span class="code-keyword">end</span></span>
+                        </div>
+                    </div>
+                `
+            },
+            2: {
+                title: "Working with Parts & Objects",
+                content: `
+                    <div class="section-header">
+                        <h4>🧱 Understanding Roblox Objects</h4>
+                    </div>
+                    <p>Everything in Roblox is an object with properties, methods, and events.</p>
+                    
+                    <div class="section-header">
+                        <h4>✨ Creating Parts</h4>
+                    </div>
+                    <div class="code-container">
+                        <div class="code-block">
+<span class="code-line"><span class="code-comment">-- Create a new part</span></span>
+<span class="code-line"><span class="code-keyword">local</span> newPart = Instance.new(<span class="code-string">"Part"</span>)</span>
+<span class="code-line">newPart.Parent = workspace</span>
+<span class="code-line">newPart.Name = <span class="code-string">"MyAwesomePart"</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-comment">-- Set properties</span></span>
+<span class="code-line">newPart.Size = Vector3.new(<span class="code-string">4</span>, <span class="code-string">1</span>, <span class="code-string">2</span>)</span>
+<span class="code-line">newPart.Position = Vector3.new(<span class="code-string">0</span>, <span class="code-string">10</span>, <span class="code-string">0</span>)</span>
+<span class="code-line">newPart.BrickColor = BrickColor.new(<span class="code-string">"Bright red"</span>)</span>
+                        </div>
+                    </div>
+                `
+            },
+            3: {
+        title: "Player & Character Systems",
+        content: `
+            <div class="section-header">
+                <h4>👤 Understanding Players and Characters</h4>
+            </div>
+            <p>Players are the real users in your game. Each player gets a character model when they join, usually a humanoid avatar.</p>
+
+            <div class="section-header">
+                <h4>🎮 Accessing Players</h4>
+            </div>
+            <div class="code-container"><div class="code-block">
+<span class="code-line"><span class="code-keyword">local</span> Players = game:GetService(<span class="code-string">"Players"</span>)</span>
+<span class="code-line">Players.PlayerAdded:Connect(<span class="code-keyword">function</span>(player)</span>
+<span class="code-line">    print(<span class="code-string">"Player joined:"</span>, player.Name)</span>
+<span class="code-line"><span class="code-keyword">end</span>)</span>
+            </div></div>
+
+            <div class="section-header">
+                <h4>🧍 Character Control</h4>
+            </div>
+            <div class="code-container"><div class="code-block">
+<span class="code-line">player.CharacterAdded:Connect(<span class="code-keyword">function</span>(char)</span>
+<span class="code-line">    <span class="code-keyword">local</span> hum = char:WaitForChild(<span class="code-string">"Humanoid"</span>)</span>
+<span class="code-line">    hum.WalkSpeed = 32</span>
+<span class="code-line"><span class="code-keyword">end</span>)</span>
+            </div></div>
+
+            <div class="section-header">
+                <h4>🏅 Leaderstats</h4>
+            </div>
+            <div class="code-container"><div class="code-block">
+<span class="code-line"><span class="code-keyword">local</span> stats = Instance.new(<span class="code-string">"Folder"</span>, player)</span>
+<span class="code-line">stats.Name = <span class="code-string">"leaderstats"</span></span>
+
+<span class="code-line"><span class="code-keyword">local</span> coins = Instance.new(<span class="code-string">"IntValue"</span>)</span>
+<span class="code-line">coins.Name = <span class="code-string">"Coins"</span>; coins.Value = 0</span>
+<span class="code-line">coins.Parent = stats</span>
+            </div></div>
+
+            <div class="section-header">
+                <h4>💬 Custom Chat Commands</h4>
+            </div>
+            <div class="code-container"><div class="code-block">
+<span class="code-line">player.Chatted:Connect(<span class="code-keyword">function</span>(msg)</span>
+<span class="code-line">    <span class="code-keyword">if</span> msg == <span class="code-string">"!dance"</span> <span class="code-keyword">then</span></span>
+<span class="code-line">        print(player.Name .. <span class="code-string">" is dancing!"</span>)</span>
+<span class="code-line">    <span class="code-keyword">end</span></span>
+<span class="code-line"><span class="code-keyword">end</span>)</span>
+            </div></div>
+        `
+    },
+    4: {
+        title: "GUI Creation & Design",
+        content: `
+            <div class="section-header"><h4>🎨 Roblox GUI System</h4></div>
+            <p>GUIs are 2D elements that overlay the player’s screen. They include menus, buttons, health bars, and more.</p>
+
+            <div class="section-header"><h4>🧱 Creating a GUI</h4></div>
+            <div class="step-container"><span class="step-number">1</span>Insert a ScreenGui in StarterGui</div>
+            <div class="step-container"><span class="step-number">2</span>Add a Frame or TextButton</div>
+            <div class="step-container"><span class="step-number">3</span>Style with Properties (Size, Position, Color)</div>
+
+            <div class="section-header"><h4>🔘 Button Interactions</h4></div>
+            <div class="code-container"><div class="code-block">
+<span class="code-line"><span class="code-keyword">local</span> button = script.Parent</span>
+<span class="code-line">button.MouseButton1Click:Connect(<span class="code-keyword">function</span>()</span>
+<span class="code-line">    print(<span class="code-string">"Clicked!"</span>)</span>
+<span class="code-line"><span class="code-keyword">end</span>)</span>
+            </div></div>
+
+            <div class="section-header"><h4>📱 Mobile-Friendly Design</h4></div>
+            <p>Use UIAspectRatioConstraint and UIScale to ensure your GUI works on all screen sizes.</p>
+        `
+    },
+    5: {
+        title: "Events & Communication",
+        content: `
+            <div class="section-header"><h4>📡 What Are Events?</h4></div>
+            <p>Events let scripts talk to each other. They are crucial for multiplayer logic (client/server).</p>
+
+            <div class="section-header"><h4>🔄 Using RemoteEvents</h4></div>
+            <div class="code-container"><div class="code-block">
+<span class="code-line"><span class="code-comment">-- Server Script</span></span>
+<span class="code-line">RemoteEvent.OnServerEvent:Connect(<span class="code-keyword">function</span>(player, message)</span>
+<span class="code-line">    print(player.Name .. <span class="code-string">" says "</span> .. message)</span>
+<span class="code-line"><span class="code-keyword">end</span>)</span>
+            </div></div>
+
+            <div class="code-container"><div class="code-block">
+<span class="code-line"><span class="code-comment">-- LocalScript</span></span>
+<span class="code-line">RemoteEvent:FireServer(<span class="code-string">"Hello!"</span>)</span>
+            </div></div>
+
+            <div class="section-header"><h4>🧠 RemoteFunction (Return Value)</h4></div>
+            <p>RemoteFunctions let the client ask the server something and get an answer back:</p>
+            <div class="code-container"><div class="code-block">
+<span class="code-line">RemoteFunction.OnServerInvoke = <span class="code-keyword">function</span>(player)</span>
+<span class="code-line">    <span class="code-keyword">return</span> <span class="code-string">"Welcome!"</span></span>
+<span class="code-line"><span class="code-keyword">end</span></span>
+            </div></div>
+        `
+    },
+    6: {
+        title: "Data Storage & Persistence",
+        content: `
+            <div class="section-header"><h4>💾 Saving Player Data</h4></div>
+            <p>Use DataStoreService to save and load data across game sessions. Wrap calls in <code>pcall</code> to prevent crashes.</p>
+
+            <div class="code-container"><div class="code-block">
+<span class="code-line"><span class="code-keyword">local</span> DataStoreService = game:GetService(<span class="code-string">"DataStoreService"</span>)</span>
+<span class="code-line"><span class="code-keyword">local</span> CoinsData = DataStoreService:GetDataStore(<span class="code-string">"PlayerCoins"</span>)</span>
+
+<span class="code-line">Players.PlayerAdded:Connect(<span class="code-keyword">function</span>(player)</span>
+<span class="code-line">    <span class="code-keyword">local</span> success, data = pcall(<span class="code-keyword">function</span>()</span>
+<span class="code-line">        <span class="code-keyword">return</span> CoinsData:GetAsync(player.UserId)</span>
+<span class="code-line">    <span class="code-keyword">end</span>)</span>
+<span class="code-line">    <span class="code-keyword">if</span> success <span class="code-keyword">and</span> data <span class="code-keyword">then</span></span>
+<span class="code-line">        print(<span class="code-string">"Loaded:"</span>, data)</span>
+<span class="code-line">    <span class="code-keyword">end</span></span>
+<span class="code-line"><span class="code-keyword">end</span>)</span>
+            </div></div>
+        `
+    },
+    7: {
+        title: "Game Mechanics & Logic",
+        content: `
+            <div class="section-header"><h4>⚙️ Core Systems</h4></div>
+            <p>Game logic makes your experience engaging. This includes combat, inventory, crafting, economy, and more.</p>
+
+            <div class="section-header"><h4>📦 Simple Inventory</h4></div>
+            <div class="code-container"><div class="code-block">
+<span class="code-line"><span class="code-keyword">local</span> inventory = {}</span>
+<span class="code-line"><span class="code-keyword">table.insert</span>(inventory, <span class="code-string">"Sword"</span>)</span>
+<span class="code-line">print(inventory[1]) <span class="code-comment">-- Output: Sword</span></span>
+            </div></div>
+
+            <div class="section-header"><h4>🩸 Combat System (Touch)</h4></div>
+            <div class="code-container"><div class="code-block">
+<span class="code-line">part.Touched:Connect(<span class="code-keyword">function</span>(hit)</span>
+<span class="code-line">    <span class="code-keyword">local</span> humanoid = hit.Parent:FindFirstChildOfClass(<span class="code-string">"Humanoid"</span>)</span>
+<span class="code-line">    <span class="code-keyword">if</span> humanoid <span class="code-keyword">then</span> humanoid:TakeDamage(25) <span class="code-keyword">end</span></span>
+<span class="code-line"><span class="code-keyword">end</span>)</span>
+            </div></div>
+        `
+    },
+    8: {
+        title: "Advanced Scripting & Optimization",
+        content: `
+            <div class="section-header"><h4>📦 ModuleScripts</h4></div>
+            <p>Use ModuleScripts to organize your code and reuse it across different scripts.</p>
+            <div class="code-container"><div class="code-block">
+<span class="code-line"><span class="code-keyword">local</span> MyModule = {}</span>
+<span class="code-line">MyModule.sayHi = <span class="code-keyword">function</span>()</span>
+<span class="code-line">    print(<span class="code-string">"Hello from Module!"</span>)</span>
+<span class="code-line"><span class="code-keyword">end</span></span>
+
+<span class="code-line"><span class="code-keyword">return</span> MyModule</span>
+            </div></div>
+
+            <div class="section-header"><h4>🚀 Optimization Tips</h4></div>
+            <ul>
+                <li>Avoid using <code>while true do</code> without waits</li>
+                <li>Use <code>:Disconnect()</code> when no longer listening to events</li>
+                <li>Use <code>CollectionService</code> to manage many objects at once</li>
+            </ul>
+        `
+    }
+};
+        
+
+        // Functions
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 2 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        function renderModules() {
+            const container = document.getElementById('curriculum');
+            container.innerHTML = '';
+            
+            modules.forEach(module => {
+                const moduleEl = document.createElement('div');
+                moduleEl.className = `module ${module.completed ? 'completed' : ''}`;
+                moduleEl.addEventListener('click', () => openLesson(module.id));
+                
+                moduleEl.innerHTML = `
+                    <div class="module-header">
+                        <div class="module-icon">${module.icon}</div>
+                        <div>
+                            <h3>${module.title}</h3>
+                            <div class="difficulty ${module.difficulty}">${module.difficulty.toUpperCase()}</div>
+                        </div>
+                    </div>
+                    <p>${module.description}</p>
+                    <ul class="topics">
+                        ${module.topics.map(topic => `<li>${topic}</li>`).join('')}
+                    </ul>
+                `;
+                
+                container.appendChild(moduleEl);
+            });
+            
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const completedModules = modules.filter(m => m.completed).length;
+            const totalModules = modules.length;
+            const percentage = Math.round((completedModules / totalModules) * 100);
+            
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            
+            progressBar.style.width = percentage + '%';
+            progressText.textContent = `${percentage}% Complete`;
+        }
+
+        function openLesson(moduleId) {
+            const modal = document.getElementById('lessonModal');
+            const content = document.getElementById('lessonContent');
+            const lesson = lessonContent[moduleId];
+            
+            if (lesson) {
+                content.innerHTML = `
+                    <div class="modal-header">
+                        <h2 class="lesson-title">${lesson.title}</h2>
+                        <span class="close">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="lesson-content">
+                            ${lesson.content}
+                            <button class="complete-button" onclick="completeLesson(${moduleId})">
+                                🎉 Mark as Complete ✅
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                content.innerHTML = `
+                    <div class="modal-header">
+                        <h2 class="lesson-title">Coming Soon! 🚧</h2>
+                        <span class="close">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="lesson-content">
+                            <div class="section-header">
+                                <h4>🔮 Under Development</h4>
+                            </div>
+                            <p>This lesson is being crafted with care for you. Check back soon!</p>
+                            <p>In the meantime, try the available lessons to build your foundation.</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            modal.style.display = 'block';
+        }
+
+        function completeLesson(moduleId) {
+            const module = modules.find(m => m.id === moduleId);
+            if (module) {
+                module.completed = true;
+                renderModules();
+                document.getElementById('lessonModal').style.display = 'none';
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Event listeners
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('close')) {
+                document.getElementById('lessonModal').style.display = 'none';
+            }
+        });
+
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('lessonModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            renderModules();
+        });
+    </script>
 </body>
 </html>
